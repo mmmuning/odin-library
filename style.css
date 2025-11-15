@@ -1,7 +1,401 @@
+:root {
+    --font-size-xs: 1.2rem;
+    --font-size-sm: 1.4rem;
+    --font-size-md: 1.6rem;
+    --font-size-lg: 2rem;
+    --font-size-xl: 3rem;
+    --spacing-xxs: 0.6rem;
+    --spacing-xs: 0.8rem;
+    --spacing-sm: 1.6rem;
+    --spacing-md: 2.4rem;
+    --spacing-lg: 4rem;
+    --icon-xs: 1rem;
+    --icon-sm: 1.6rem; 
+    --icon-md: 2rem;   
+    --icon-lg: 3rem;  
+    --icon-xl: 5rem;
+    --icon-xxl: 7rem;
+    --border-radius-xs: 0.8rem;
+    --border-radius-sm: 1.2rem;
+    --book-cover-width: 18rem;
+    --book-cover-height: 24rem;
+    --color-primary: #2783de;
+    --color-secondary: #cbecff;
+    --color-accent: #f5deb3;
+    --color-to-read: #8a2be2;   
+    --color-reading: #d35400;   
+    --color-read: #2e8b57;    
+}
+
+html[data-color-mode="light"] {
+    --color-text: #000;
+    --color-subtext: #6a7080;
+    --color-bg: #e9e9e9;
+    --color-card: #ffffff;
+}
+
+html[data-color-mode="dark"] {
+    --color-text: #fff;
+    --color-subtext: #9ca8b4;
+    --color-bg: #0d0f12;
+    --color-card: #272e35;
+}
+
 body, 
 html {
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 62.5%;
+    background-color: var(--color-bg);
     min-height: 100vh;
     margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+}
+
+header .logo {
+    display: flex;
+}
+
+header .logo svg {
+    fill: var(--color-text);
+    width: var(--icon-xxl);
+    height: auto;
+    margin-right: var(--spacing-xs);
+}
+
+header .logo h1 {
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+header .logo p {
+    font-size: var(--font-size-md);
+    color: var(--color-subtext);
+    margin: 0;
+}
+
+.header-btn {
+    display: flex;
+    gap: var(--spacing-sm)
+}
+
+#theme-toggle {
+    font-size: var(--font-size-lg);
+    background-color: var(--color-card);
+    color: var(--color-text);
+    border: none;
+    border-radius: 100%;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.btn-add {
+    font-size: var(--font-size-md);
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.btn-add:hover {
+    transform: scale(1.1); 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md);
+}
+
+ul {
+    font-size: var(--font-size-md);
+    list-style-type: none;
+    display: flex;
+    justify-content: left;
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-md);
+    margin: 0;
+}
+
+ul li {
+    color: var(--color-subtext);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxs);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    border-radius: var(--border-radius-xs);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+ul li:hover {
+    background-color: var(--color-card);
+}
+
+ul li.active {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+ul li svg {
+    fill: var(--color-subtext);
+    width: var(--icon-md);
+    height: auto;
+}
+
+ul li.active svg {
+    fill: #fff;
+    
+}
+
+ul li p {
+    margin: 0;
+}
+
+.book-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, var(--book-cover-width));
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md);
+}
+
+.book {
+    background-color: var(--color-card);
+    border-radius: var(--border-radius-sm);
+}
+
+.book-cover {
+    background-image: url(https://covers.openlibrary.org/b/id/15129220-L.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    width: var(--book-cover-width);
+    height: var(--book-cover-height);
+    overflow: hidden;
+}
+
+.btn-action {
+    display: flex;
+    justify-content: space-between;
+    margin: var(--spacing-xs);
+}
+
+.btn-status {
+    font-size: var(--font-size-sm);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-xs);
+    padding: var(--spacing-xs);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-status:hover {
+    opacity: 0.8;
+}
+
+.btn-status[data-book-status="to-read"] {
+  background-color: var(--color-to-read);
+}
+
+.btn-status[data-book-status="reading"] {
+  background-color: var(--color-reading);
+}
+
+.btn-status[data-book-status="read"] {
+  background-color: var(--color-read);
+}
+
+.status-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+    font-size: var(--font-size-sm);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    gap: var(--spacing-xxs);
+    top: 110%;
+    left: 0;
+    background: var(--color-bg);
+    color: white;
+    border-radius: var(--border-radius-xs);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: none;
+    min-width: 9rem;
+    z-index: 1;
+}
+
+.dropdown-menu li {
+    margin: 0;
+    padding: var(--spacing-xxs);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dropdown-menu li:hover {
+    color: var(--color-bg);
+  background: var(--color-subtext);
+}
+
+.status-dropdown.open .dropdown-menu {
+  display: block;
+}
+
+.btn-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-text);
+    border: none;
+    margin: 0;
+    padding: 0;   
+    border-radius: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-remove:hover {
+    opacity: 0.8;
+}
+
+.btn-remove svg {
+    fill: var(--color-bg);
+    width: var(--icon-lg);
+    height: var(--icon-lg);
+    transform: scale(1.3);
+}
+
+.book-details {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxs);
+    overflow: hidden;
+}
+
+.book-details > * {
+    color: var(--color-text);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.modal {
+    position: fixed;        
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;         
+    justify-content: center; 
+    align-items: center;     
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-header h2 {
+    font-size: var(--font-size-xl);
+    margin: 0;
+}
+
+.btn-close {
+    font-size: var(--font-size-xl);
+    font-weight: bold;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content {
+    background-color: var(--color-card);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    width: 26%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+form div {
+    width: 100%;
+}
+
+label {
+    font-size: var(--font-size-md);
+    color: var(--color-subtext);
+    display: block;
+    margin-bottom: var(--spacing-xs);
+}
+
+input {
+    font-size: var(--font-size-md);
+    width: 100%;          
+    box-sizing: border-box; 
+    border: none;
+    outline: 2px solid var(--color-subtext);
+    border-radius: var(--border-radius-xs);
+    padding: var(--spacing-xs);
+    margin: 0;
+}
+
+input:focus {
+    outline: 2px solid var(--color-primary);
+}
+
+select {
+    font-size: var(--font-size-md);
+    width: 100%;          
+    box-sizing: border-box; 
+    border: none;
+    outline: 2px solid var(--color-subtext);
+    border-radius: var(--border-radius-xs);
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+}
+
+form button {
+    font-size: var(--font-size-md);
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    height: auto;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.5s;
 }
