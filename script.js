@@ -89,7 +89,7 @@ function displayFilteredBooks(filter) {
 function renderBook(bookObj) {
   const book = document.createElement("div");
   book.classList.add("book");
-  book.dataset.id = book.id;
+  book.dataset.id = bookObj.id;
 
   const cover = document.createElement("div");
   cover.classList.add("book-cover");
@@ -227,6 +227,11 @@ document.addEventListener("click", (e) => {
 
     btn.textContent = newLabel;
     btn.dataset.bookStatus = newValue;
+
+    const bookEl = e.target.closest(".book");
+    const bookId = bookEl.dataset.id;
+    const bookObj = myLibrary.find((b) => b.id === bookId);
+    if (bookObj) bookObj.status = newValue;
 
     container.classList.remove("open");
   }
