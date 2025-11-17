@@ -243,7 +243,7 @@ filters.forEach((btn) => {
     filters.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
 
-    const filter = btn.textContent.trim().toLowerCase();
+    const filter = btn.dataset.status;
     displayFilteredBooks(filter);
   });
 });
