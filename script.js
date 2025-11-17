@@ -5,6 +5,7 @@ const addBtn = document.querySelector(".btn-add");
 const closeBtn = document.querySelector(".btn-close");
 const statusBtn = document.querySelector(".btn-close");
 const themeToggleBtn = document.querySelector("#theme-toggle");
+const filters = document.querySelectorAll(".filters li");
 
 const myLibrary = [];
 
@@ -70,6 +71,21 @@ function displayAllBooks() {
   }
 }
 
+function displayFilteredBooks(filter) {
+  while (booksContainer.firstChild) {
+    booksContainer.removeChild(booksContainer.firstChild);
+  }
+
+  let booksToShow = myLibrary;
+  if (filter !== "all") {
+    booksToShow = myLibrary.filter((book) => book.status === filter);
+  }
+
+  booksToShow.forEach((book) => {
+    booksContainer.appendChild(renderBook(book));
+  });
+}
+
 function renderBook(bookObj) {
   const book = document.createElement("div");
   book.classList.add("book");
@@ -96,7 +112,6 @@ function renderBook(bookObj) {
   menu.classList.add("dropdown-menu");
 
   ["to-read", "reading", "read"].forEach((status) => {
-    console.log(status);
     const li = document.createElement("li");
     li.dataset.status = status;
     li.textContent = capitalizeEachWord(replaceHyphenWithSpace(status));
@@ -109,6 +124,10 @@ function renderBook(bookObj) {
   const removeBtn = document.createElement("button");
   removeBtn.classList.add("btn-remove");
   removeBtn.title = "Remove Book";
+
+  removeBtn.addEventListener("click", () => {
+    removeBookFromLibrary(bookObj, book);
+  });
 
   const svgNS = "http://www.w3.org/2000/svg";
   const svg = document.createElementNS(svgNS, "svg");
@@ -163,7 +182,7 @@ form.addEventListener("submit", (event) => {
   const title = data.get("title");
   const author = data.get("author");
   const pages = parseInt(data.get("pages"), 10);
-  const status = data.get("status").toLowerCase(); // normalize to lowercase
+  const status = data.get("status").toLowerCase();
 
   addBookToLibrary(title, author, pages, status);
 
@@ -176,6 +195,12 @@ form.addEventListener("submit", (event) => {
 function addBookToLibrary(title, author, pages, status) {
   const newBook = new Book(title, author, pages, status);
   myLibrary.push(newBook);
+}
+
+function removeBookFromLibrary(bookObj, bookEl) {
+  const index = myLibrary.findIndex((b) => b.id === bookObj.id);
+  if (index > -1) myLibrary.splice(index, 1);
+  bookEl.remove();
 }
 
 // --- Change Book Status ---
@@ -207,6 +232,18 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// --- Filter Function ---
+filters.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    filters.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const filter = btn.textContent.trim().toLowerCase();
+    displayFilteredBooks(filter);
+  });
+});
+
+// --- Modal Functions ---
 addBtn.onclick = function () {
   modal.style.display = "flex";
 };
