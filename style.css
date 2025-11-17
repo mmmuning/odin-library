@@ -17,8 +17,8 @@
     --icon-xxl: 7rem;
     --border-radius-xs: 0.8rem;
     --border-radius-sm: 1.2rem;
-    --book-cover-width: 18rem;
-    --book-cover-height: 24rem;
+    --book-cover-width: 20rem;
+    --book-cover-height: 30rem;
     --color-primary: #2783de;
     --color-secondary: #cbecff;
     --color-accent: #f5deb3;
@@ -168,7 +168,7 @@ ul li p {
     margin: 0;
 }
 
-.book-cards {
+.books-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, var(--book-cover-width));
     gap: var(--spacing-md);
@@ -280,7 +280,7 @@ ul li p {
 }
 
 .btn-remove svg {
-    fill: var(--color-bg);
+    fill: var(--color-card);
     width: var(--icon-lg);
     height: var(--icon-lg);
     transform: scale(1.3);
@@ -322,6 +322,7 @@ ul li p {
 
 .modal-header h2 {
     font-size: var(--font-size-xl);
+    color: var(--color-text);
     margin: 0;
 }
 
@@ -336,7 +337,7 @@ ul li p {
 }
 
 .modal-content {
-    background-color: var(--color-card);
+    background-color: var(--color-bg);
     border-radius: var(--border-radius-sm);
     padding: var(--spacing-md);
     width: 26%;
@@ -362,6 +363,8 @@ label {
 
 input {
     font-size: var(--font-size-md);
+    background-color: var(--color-card);
+    color: var(--color-text);
     width: 100%;          
     box-sizing: border-box; 
     border: none;
@@ -377,6 +380,8 @@ input:focus {
 
 select {
     font-size: var(--font-size-md);
+    background-color: var(--color-card);
+    color: var(--color-text);
     width: 100%;          
     box-sizing: border-box; 
     border: none;
