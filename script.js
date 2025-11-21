@@ -9,23 +9,21 @@ const filters = document.querySelectorAll(".filters li");
 
 const myLibrary = [];
 
-function Book(
-  title,
-  author,
-  pages,
-  status,
-  cover = "img/book-cover-placeholder.jpg"
-) {
-  if (!new.target) {
-    throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+  constructor(
+    title,
+    author,
+    pages,
+    status,
+    cover = "img/book-cover-placeholder.jpg"
+  ) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
+    this.cover = cover;
   }
-
-  this.id = crypto.randomUUID();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.status = status;
-  this.cover = cover;
 }
 
 // --- Dummy Books ---
